@@ -75,6 +75,8 @@ class CommentAdmin(admin.ModelAdmin):
     list_filter = (
         ('blog', RelatedDropdownFilter),
     )
+    list_select_related= True
+    raw_id_fields = ('blog',)
     
 admin.site.register(Blog, BlogAdmin)
 admin.site.register(Comment, CommentAdmin)
