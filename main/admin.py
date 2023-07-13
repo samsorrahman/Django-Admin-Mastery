@@ -13,6 +13,7 @@ class BlogAdmin(admin.ModelAdmin):
     list_per_page = 20
     actions = ('set_blogs_to_published',)
     date_hierarchy = ('date_created')
+    fields = (('title', 'slug'), 'body', 'is_draft')
     
     def get_ordering(self, request):
         if request.user.is_superuser:
