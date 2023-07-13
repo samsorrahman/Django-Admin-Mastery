@@ -23,6 +23,7 @@ admin.site.site_header = 'Super Blog Admin'
 admin.site.index_title = 'Super Blog Adminstrator'
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('grappelli/', include('grappelli.urls')),
     path('summernote/', include('django_summernote.urls')),
 ]
 if settings.DEBUG:
