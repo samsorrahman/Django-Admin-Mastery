@@ -1,10 +1,11 @@
 from typing import Any, List, Tuple, Union
 from django.contrib import admin
 from django.http.request import HttpRequest
-from .models import Blog
+from .models import Blog, Comment
 from django.contrib import messages
 from django.utils import timezone
 from django_summernote.admin import SummernoteModelAdmin
+
 # Register your models here.
 
 class BlogAdmin(SummernoteModelAdmin):
@@ -45,3 +46,5 @@ class BlogAdmin(SummernoteModelAdmin):
     set_blogs_to_published.short_description= 'Mark selected blog as published'
     
 admin.site.register(Blog, BlogAdmin)
+
+admin.site.register(Comment)
