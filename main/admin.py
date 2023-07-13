@@ -1,6 +1,6 @@
 from typing import Any, List, Tuple, Union
 from django.contrib import admin
-from django.http.request import HttpRequest
+from django.db.models import Count
 from .models import Blog, Comment
 from django.contrib import messages
 from django.utils import timezone
@@ -17,7 +17,7 @@ class CommentInline(admin.TabularInline):
     
 
 class BlogAdmin(SummernoteModelAdmin):
-    list_display = ['title', 'date_created', 'last_modified', 'is_draft', 'days_since_creation']
+    list_display = ['title', 'date_created', 'last_modified', 'is_draft', 'days_since_creation', 'no_of_comments']
     list_filter = ['is_draft', 'date_created']
     search_fields = ['title']
     prepopulated_fields = {'slug': ('title',)}
@@ -36,7 +36,15 @@ class BlogAdmin(SummernoteModelAdmin):
     }),
     )
     summernote_fields = ('body',)
-
+    
+    def get_queryset(self, request):
+        queryset= super().get_queryset(request)
+        queryset= queryset.annotate(comments_count=Count('comments'))
+        return queryset
+    
+    def no_of_comments(self, blog):
+        return blog.comments_count
+    no_of_comments.admin_order_field= 'comments_count'
     def get_ordering(self, request):
         if request.user.is_superuser:
             return ('title', '-date_created')
