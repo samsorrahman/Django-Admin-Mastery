@@ -8,6 +8,7 @@ class Blog(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
     is_draft = models.BooleanField(default=True)
+    slug = models.SlugField(max_length=250, blank=True)
     
     
     def __str__(self):
