@@ -1,5 +1,5 @@
-from typing import Any, List, Tuple, Union
-from django_admin_listfilter_dropdown.filters import DropdownFilter, RelatedDropdownFilter
+from rangefilter.filters import  DateRangeFilterBuilder
+from django_admin_listfilter_dropdown.filters import  RelatedDropdownFilter
 from django.contrib import admin
 from django.db.models import Count
 from .models import Blog, Comment, Category
@@ -19,7 +19,10 @@ class CommentInline(admin.TabularInline):
 
 class BlogAdmin(SummernoteModelAdmin):
     list_display = ['title', 'date_created', 'last_modified', 'is_draft', 'days_since_creation', 'no_of_comments']
-    list_filter = ['is_draft', 'date_created']
+    list_filter = (
+        "is_draft",
+        ("date_created", DateRangeFilterBuilder()),
+    )
     search_fields = ['title']
     prepopulated_fields = {'slug': ('title',)}
     list_per_page = 20

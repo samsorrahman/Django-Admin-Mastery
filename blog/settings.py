@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'main',
     'django_summernote',
     'django_admin_listfilter_dropdown',
+    'rangefilter',
 ]
 
 MIDDLEWARE = [
