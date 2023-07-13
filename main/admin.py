@@ -12,6 +12,7 @@ class CommentInline(admin.TabularInline):
     model= Comment
     fields = ('text', 'is_active')
     extra= 1
+    classes = ('collapse',)
     
     
 
@@ -30,7 +31,8 @@ class BlogAdmin(SummernoteModelAdmin):
     }),
     ('Advance Options', {
         'fields': ('is_draft', ),
-        'description': 'Option to configure blog creation'
+        'description': 'Option to configure blog creation',
+        'classes': ('collapse',)
     }),
     )
     summernote_fields = ('body',)
