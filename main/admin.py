@@ -30,6 +30,18 @@ class BlogAdmin(SummernoteModelAdmin):
     date_hierarchy = ('date_created')
     inlines = [CommentInline]
     filter_horizontal = ('categories',)
+    
+    # def get_actions(self, request):
+    #     actions = super().get_actions(request)
+    #     try:
+    #         del actions['delete_selected']
+    #     except KeyError:
+    #         pass
+    #     return actions
+    
+    # def has_delete_permission(self, request, obj=None):
+    #     return False
+    
     fieldsets = (
     (None, {
         'fields': (('title', 'slug'), 'body'),
