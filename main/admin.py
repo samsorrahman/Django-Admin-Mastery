@@ -8,6 +8,13 @@ from django_summernote.admin import SummernoteModelAdmin
 
 # Register your models here.
 
+class CommentInline(admin.TabularInline):
+    model= Comment
+    fields = ('text', 'is_active')
+    extra= 1
+    
+    
+
 class BlogAdmin(SummernoteModelAdmin):
     list_display = ['title', 'date_created', 'last_modified', 'is_draft', 'days_since_creation']
     list_filter = ['is_draft', 'date_created']
@@ -16,7 +23,7 @@ class BlogAdmin(SummernoteModelAdmin):
     list_per_page = 20
     actions = ('set_blogs_to_published',)
     date_hierarchy = ('date_created')
-    
+    inlines = [CommentInline]
     fieldsets = (
     (None, {
         'fields': (('title', 'slug'), 'body'),
@@ -33,7 +40,7 @@ class BlogAdmin(SummernoteModelAdmin):
             return ('title', '-date_created')
         
         return ('title')
- 
+    
     def days_since_creation(self,blog):
         diff= timezone.now() - blog.date_created
         return diff.days
