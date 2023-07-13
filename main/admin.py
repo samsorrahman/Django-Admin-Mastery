@@ -4,9 +4,10 @@ from django.http.request import HttpRequest
 from .models import Blog
 from django.contrib import messages
 from django.utils import timezone
+from django_summernote.admin import SummernoteModelAdmin
 # Register your models here.
 
-class BlogAdmin(admin.ModelAdmin):
+class BlogAdmin(SummernoteModelAdmin):
     list_display = ['title', 'date_created', 'last_modified', 'is_draft', 'days_since_creation']
     list_filter = ['is_draft', 'date_created']
     search_fields = ['title']
@@ -24,6 +25,7 @@ class BlogAdmin(admin.ModelAdmin):
         'description': 'Option to configure blog creation'
     }),
     )
+    summernote_fields = ('body',)
 
     def get_ordering(self, request):
         if request.user.is_superuser:
