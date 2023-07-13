@@ -1,4 +1,5 @@
 from typing import Any, List, Tuple, Union
+from django_admin_listfilter_dropdown.filters import DropdownFilter, RelatedDropdownFilter
 from django.contrib import admin
 from django.db.models import Count
 from .models import Blog, Comment, Category
@@ -25,6 +26,7 @@ class BlogAdmin(SummernoteModelAdmin):
     actions = ('set_blogs_to_published',)
     date_hierarchy = ('date_created')
     inlines = [CommentInline]
+    filter_horizontal = ('categories',)
     fieldsets = (
     (None, {
         'fields': (('title', 'slug'), 'body'),
@@ -67,6 +69,10 @@ class CommentAdmin(admin.ModelAdmin):
     list_display =('blog','text', 'date_created', 'is_active')
     list_editable = ('text', 'is_active',)
     list_per_page = 10
+    list_filter = (
+        ('blog', RelatedDropdownFilter),
+    )
+    
 admin.site.register(Blog, BlogAdmin)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(Category)
