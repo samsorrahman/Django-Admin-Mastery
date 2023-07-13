@@ -1,7 +1,7 @@
 from typing import Any, List, Tuple, Union
 from django.contrib import admin
 from django.db.models import Count
-from .models import Blog, Comment
+from .models import Blog, Comment, Category
 from django.contrib import messages
 from django.utils import timezone
 from django_summernote.admin import SummernoteModelAdmin
@@ -69,3 +69,4 @@ class CommentAdmin(admin.ModelAdmin):
     list_per_page = 10
 admin.site.register(Blog, BlogAdmin)
 admin.site.register(Comment, CommentAdmin)
+admin.site.register(Category)
