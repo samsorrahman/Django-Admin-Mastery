@@ -30,7 +30,7 @@ class BlogAdmin(SummernoteModelAdmin):
         'fields': (('title', 'slug'), 'body'),
     }),
     ('Advance Options', {
-        'fields': ('is_draft', ),
+        'fields': ('is_draft', 'categories' ),
         'description': 'Option to configure blog creation',
         'classes': ('collapse',)
     }),
