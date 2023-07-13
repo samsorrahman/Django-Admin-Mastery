@@ -28,3 +28,13 @@ class Comment(models.Model):
     def __str__(self):
         return self.text
     
+# generating random data
+# python manage.py shell
+# from faker import Faker
+# faker = Faker()
+# from main.models import Blog, Comment
+# for blog in Blog.objects.iterator():
+#     comments = [Comment(text=faker.paragraph(), blog=blog) for _ in range(0, 3)]
+#     Comment.objects.bulk_create(comments)
+
+    

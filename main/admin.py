@@ -45,6 +45,9 @@ class BlogAdmin(SummernoteModelAdmin):
         self.message_user(request, '{} blogs have been published successfully.'.format(count), messages.SUCCESS)
     set_blogs_to_published.short_description= 'Mark selected blog as published'
     
-admin.site.register(Blog, BlogAdmin)
+    
+class CommentAdmin(admin.ModelAdmin):
+    list_display =('blog','text', 'date_created', 'is_active')
 
-admin.site.register(Comment)
+admin.site.register(Blog, BlogAdmin)
+admin.site.register(Comment, CommentAdmin)
